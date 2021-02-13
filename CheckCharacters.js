@@ -1,4 +1,4 @@
-const IsHankakukanaContained = (text) => {
+const IsHankakukanaIncluded = (text) => {
     if (!text) return false;
 
     // referred to the following page: https://ja.wikipedia.org/wiki/Unicode%E4%B8%80%E8%A6%A7_F000-FFFF
@@ -8,4 +8,4 @@ const IsHankakukanaContained = (text) => {
 };
 
 
-exports.IsHankakukanaContained = IsHankakukanaContained;
+exports.IsHankakukanaIncluded = IsHankakukanaIncluded;
