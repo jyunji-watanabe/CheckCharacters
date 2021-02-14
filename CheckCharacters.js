@@ -7,12 +7,19 @@ var IsHankakukanaIncluded = IsHankakukanaIncluded || function (text) {
     return text.search(/[ｦ-ﾟ]/) > -1;
 };
 
-var IsNumberOnly = IsNumberOnly || function (text) {
+var IsValidNumber = IsValidNumber || function (text) {
     if (!text) return false;
 
     // 0-9, leading '-', and (only one). are accepted
     return text.search(/^-?([0-9]+\.?[0-9]*|.?[0-9]+)$/) > -1;
 };
 
+var IsHankakuAlphaNumericOnly = IsHankakuAlphaNumericOnly || function (text) {
+    if (!text) return false;
+
+    return text.search(/^[0-9a-zA-Z]+$/) > -1;
+};
+
 exports.IsHankakukanaIncluded = IsHankakukanaIncluded;
-exports.IsNumberOnly = IsNumberOnly;
+exports.IsValidNumber = IsValidNumber;
+exports.IsHankakuAlphaNumericOnly = IsHankakuAlphaNumericOnly;
