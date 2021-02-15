@@ -55,3 +55,26 @@ describe("testing IsHankakuAlphaNumericOnly function", () => {
     });
 
 });
+
+describe("testing IsZenkakuOnly function", () => {
+    test("empty string is zenkaku only", () => {expect(CheckCharacters.IsZenkakuOnly("")).toBe(true)});
+    test("null is zenkaku only", () => {expect(CheckCharacters.IsZenkakuOnly(null)).toBe(true)});
+    test("zenkaku kanas are zenkaku", () => {
+        expect(CheckCharacters.IsZenkakuOnly("　、。「」『』【】〜")).toBe(true);   // 全角スペース、句読点など
+        expect(CheckCharacters.IsZenkakuOnly("ぁがろをん")).toBe(true);   // ひらがな
+        expect(CheckCharacters.IsZenkakuOnly("ァアトポヵヶ")).toBe(true);   // カタカナ
+        expect(CheckCharacters.IsZenkakuOnly("゛゜ゝゞ・ーヽヾ")).toBe(true);   // その他記号
+    });
+    test("kanjis are zenkaku", () => {
+        expect(CheckCharacters.IsZenkakuOnly("一郵黒鿏")).toBe(true);
+    });
+    test("zenkaku alphanumerics are zenkaku", () => {
+        expect(CheckCharacters.IsZenkakuOnly("！＃Ａ～８ｙ｝")).toBe(true);
+    });
+    test("mixed cases", () => {
+        expect(CheckCharacters.IsZenkakuOnly("あ１！い２う坂３え４お５")).toBe(true);
+        expect(CheckCharacters.IsZenkakuOnly(" あ１！い２う坂３え４お５")).toBe(false);   // 半角を混ぜる（前）
+        expect(CheckCharacters.IsZenkakuOnly("あ１！い２う3坂３え４お５")).toBe(false);   // 半角を混ぜる（中）
+        expect(CheckCharacters.IsZenkakuOnly("あ１！い２う坂３え４お５ﾊ")).toBe(false);   // 半角を混ぜる（後）
+    });
+});
